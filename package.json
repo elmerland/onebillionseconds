@@ -1,0 +1,34 @@
+{
+  "name": "oneb",
+  "version": "1.0.0",
+  "description": "OneBillionSeconds.com",
+  "main": "index.js",
+  "scripts": {
+    "clean": "rimraf _site",
+    "serve:webpack": "webpack --mode development --watch",
+    "serve:eleventy": "ELEVENTY_ENV=development eleventy --serve --config .eleventy.js",
+    "serve": "npm-run-all clean --parallel serve:*",
+    "build:webpack": "webpack --mode production",
+    "build:eleventy": "ELEVENTY_ENV=production eleventy",
+    "build": "run-s clean build:*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elmerland/oneb.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/elmerland/oneb/issues"
+  },
+  "homepage": "https://github.com/elmerland/oneb#readme",
+  "devDependencies": {
+    "@11ty/eleventy": "^0.12.1",
+    "luxon": "^2.2.0",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^3.0.2",
+    "webpack": "^5.65.0",
+    "webpack-cli": "^4.9.1"
+  }
+}
