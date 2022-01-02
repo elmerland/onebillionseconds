@@ -1,14 +1,10 @@
-<!doctype html>
-<html>
-
-<head>
-    <title>onebillionseconds.com</title>
-</head>
-
-<body>
-    <h1>One Billion Seconds Ago</h1>
-    <p>Was <span id="onebillionsecondsago" style="font-style:italic;">placeholder</span></p>
-    <script src="{{ '/assets/js/main.js' | url}}"></script>
-</body>
-
-</html>
+---
+layout: layout.njk
+title: One Billion Seconds
+---
+<div>One billion seconds ago:</div>
+<div id="onebillionsecondsago" class="is-size-5 has-text-weight-semibold">ONE BILLION SECONDS AGO</div>
+<br>
+<div class="">One billion seconds from now:</div>
+<div id="onebillionsecondsfromnow" class="is-size-5 has-text-weight-semibold">ONE BILLION SECONDS IN FUTURE</div>
+<script src="{{ '/assets/js/main.js' | url}}"></script>
