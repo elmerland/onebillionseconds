@@ -2,5 +2,72 @@
 layout: layout.njk
 title: One Billion Seconds
 ---
-<div id="app"></div>
+<div class="container is-max-desktop">
+    <div id="app"></div>
+    <br/>
+
+    <div class="content">
+        <p>Have some fun with the calculator:</p>
+        <div id="secondsCalculator" class=""></div>
+        <br/>
+        <p>For reference here is what one second looks like:</p>
+        <div id="oneSecondAnimation" class=""></div>
+        <br/>
+        <p>Other Comparisons</p>
+        <div class="is-flex is-justify-content-left">
+            <table class="table is-bordered has-text-left" >
+                <thead>
+                    <tr>
+                        <th># Seconds</th>
+                        <th>Equivalent</th>
+                    </tr>
+                </thead>
+                <tbody class=" is-family-monospace">
+                    <tr>
+                        <td>1,000</td>
+                        <td class="is-size-5 has-text-weight-semibold">16 minutes 40 seconds<br/>
+                            <span class="is-size-7 has-text-weight-normal is-family-sans-serif">
+                                About the time it takes to run two miles with a mouth full of skittles, or travel <a href="https://www.omnicalculator.com/physics/free-fall?c=USD&v=g:32.17405!fps2!l,v_0:0!ftps,t:1000!sec">3,000 miles from a free fall</a> due to gravity alone (about 6 round trips to the ISS from earth).
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>10,000</td>
+                        <td class="is-size-5 has-text-weight-semibold">2 hours 46 minutes 40 seconds<br/>
+                            <span class="is-size-7 has-text-weight-normal is-family-sans-serif">
+                                11 minutes shy of <i>The Fellowship of the Ring</i>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>100,000</td>
+                        <td class="is-size-5 has-text-weight-semibold">1 day 3 hours 46 minutes 40 seconds<br/>
+                            <span class="is-size-7 has-text-weight-normal is-family-sans-serif">
+                                The time it takes your body to make about <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5052503/">one liter of saliva</a>.
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>1,000,000</td>
+                        <td class="is-size-5 has-text-weight-semibold">11 days 13 hours 46 minutes 40 seconds<br/>
+                            <span class="is-size-7 has-text-weight-normal is-family-sans-serif">
+                                Walk the camino de santiago in spain <a href="https://www.keadventure.com/holidays/spain-walking-camino-de-santiago-compostela">from Sarria to Santiago de Compostela</a>, with a couple extra days for sight seeing.
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>1,000,000,000</td>
+                        <td class="is-size-5 has-text-weight-semibold">31 years 251 days 13 hours 21 minutes 28 seconds!<br/>
+                            <span class="is-size-7 has-text-weight-normal is-family-sans-serif">
+                                A little over the average <a href="https://nationalzoo.si.edu/animals/burmese-rock-python">lifespan of a burmese rock python</a>.
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
 <script src="{{ '/assets/js/index.js' | url}}"></script>
