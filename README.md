@@ -1,2 +1,2 @@
 # oneb
-OneBillionSeconds.com
+OneBillionSeconds.io
