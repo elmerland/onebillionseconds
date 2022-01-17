@@ -1,4 +1,4 @@
-# oneb
+# onebillionseconds
 
 Project site: [OneBillionSeconds.io](https://onebillionseconds.io/)
 
