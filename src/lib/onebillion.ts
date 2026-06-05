@@ -3,8 +3,6 @@ export const BILLION = 1_000_000_000;
 export const SECONDS_PER_DAY = 86_400;
 export const SECONDS_PER_WEEK = 604_800;
 export const LIFE_YEARS = 90;
-export const WEEKS_PER_YEAR = 52;
-export const WEEKS_IN_LIFE = LIFE_YEARS * WEEKS_PER_YEAR; // 4,680
 
 export function parseDate(str: string): Date | null {
   if (!str) return null;
@@ -15,14 +13,6 @@ export function parseDate(str: string): Date | null {
 
 export function addSeconds(d: Date, s: number): Date {
   return new Date(d.getTime() + s * 1000);
-}
-
-export function fmtDate(d: Date | null): string {
-  if (!d) return '—';
-  const yyyy = d.getFullYear();
-  const mm = String(d.getMonth() + 1).padStart(2, '0');
-  const dd = String(d.getDate()).padStart(2, '0');
-  return `${yyyy} · ${mm} · ${dd}`;
 }
 
 export function fmtNum(n: number): string {
