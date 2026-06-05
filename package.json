@@ -10,7 +10,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "deploy": "bash scripts/deploy.sh",
+    "deploy": "astro build && wrangler pages deploy --branch main",
     "links": "linkinator https://onebillionseconds.io --recurse --skip 'linkedin\\.com' --format csv"
   },
   "dependencies": {
