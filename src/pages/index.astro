@@ -1,0 +1,535 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+
+// Bit-art glyph bitmaps for "1", "0", "9"
+const BIT_5x7: Record<string, number[][]> = {
+  '1': [
+    [0,0,1,0,0],
+    [0,1,1,0,0],
+    [1,0,1,0,0],
+    [0,0,1,0,0],
+    [0,0,1,0,0],
+    [0,0,1,0,0],
+    [0,1,1,1,0],
+  ],
+  '0': [
+    [0,1,1,1,0],
+    [1,0,0,0,1],
+    [1,0,0,1,1],
+    [1,0,1,0,1],
+    [1,1,0,0,1],
+    [1,0,0,0,1],
+    [0,1,1,1,0],
+  ],
+  '9': [
+    [0,1,1,1,0],
+    [1,0,0,0,1],
+    [1,0,0,0,1],
+    [0,1,1,1,1],
+    [0,0,0,0,1],
+    [0,0,0,1,0],
+    [0,1,1,0,0],
+  ],
+};
+
+function makeGlyph(ch: string, cls = ''): string {
+  const rows = BIT_5x7[ch];
+  const cols = rows[0].length;
+  const cells = rows.flatMap(row =>
+    row.map(on => `<i${on ? ' class="on"' : ''}></i>`)
+  ).join('');
+  return `<div class="glyph${cls ? ' ' + cls : ''}" style="--cols:${cols}">${cells}</div>`;
+}
+
+const DEFAULT_BDAY = '1990-04-12';
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+  <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to content</a>
+
+<!-- ═══════════ PART 1 — DASHBOARD ═══════════ -->
+<div class="page" id="main-content">
+
+  <header class="head">
+    <div class="id-plate">
+      <div class="bit-mark" aria-label="10 to the 9">
+        <Fragment set:html={makeGlyph('1')} />
+        <Fragment set:html={makeGlyph('0')} />
+        <div class="bit-sup">
+          <Fragment set:html={makeGlyph('9')} />
+        </div>
+      </div>
+      <span class="url">onebillionseconds.io</span>
+    </div>
+
+    <div class="head-blurb">
+      <p>What's the story behind this?</p>
+      <a href="https://oneb.blog/blog/onebillionseconds-io/" target="_blank" rel="noopener noreferrer">Read the motivation →</a>
+    </div>
+
+    <form class="head-bday" id="form">
+      <div class="ch">
+        <span>INPUT · BIRTH DATE</span>
+      </div>
+      <div class="row">
+        <input type="date" id="bday" value={DEFAULT_BDAY} />
+      </div>
+    </form>
+  </header>
+
+  <div class="rule-strip dash">
+    <span></span><span></span><span></span><span></span><span></span><span></span>
+  </div>
+
+  <!-- CONSOLE -->
+  <section class="console">
+    <div class="ck">
+      <span>READOUT · SECONDS ALIVE · LIVE</span>
+      <span><em>● ACQUIRED</em> · FROM BIRTH <span id="ckDate">1990 · 04 · 12</span></span>
+    </div>
+
+    <div class="digits" id="bigDigits">0</div>
+
+    <div class="label">
+      <span>SECONDS · TIME ELAPSED SINCE BIRTH</span>
+      <span><em id="pctLabel">0%</em> OF ONE BILLION</span>
+    </div>
+
+    <div class="lifebar">
+      <div class="ch">
+        <span>LIFE BAR · 90 YEARS · 1 BLOCK = 1 YEAR</span>
+        <em><span class="m1">▼ 1B</span> at year 31.69 · <span class="m2">▼ 2B</span> at year 63.38</em>
+      </div>
+      <div class="lbar" id="lbar"></div>
+      <div class="lbar-labels">
+        <span>Year 0</span>
+        <span>30</span>
+        <span>60</span>
+        <span>Year 90</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUB-READOUTS -->
+  <div class="sub">
+    <div class="cell">
+      <div class="k">Days lived</div>
+      <div class="v" id="dDays">—</div>
+      <div class="u">days from birth</div>
+    </div>
+    <div class="cell">
+      <div class="k">Weeks lived</div>
+      <div class="v" id="dWeeks">—</div>
+      <div class="u">of 4,680</div>
+    </div>
+    <div class="cell">
+      <div class="k">Heartbeats (est.)</div>
+      <div class="v" id="dHb">—</div>
+      <div class="u">≈ 75 bpm</div>
+    </div>
+    <div class="cell">
+      <div class="k">Breaths (est.)</div>
+      <div class="v" id="dBr">—</div>
+      <div class="u">≈ 12 / min</div>
+    </div>
+  </div>
+
+  <!-- SCROLL CUE -->
+  <div class="scroll-cue-band">
+    <div class="ask">But how long <b>is</b> one billion seconds, really?</div>
+    <a href="#story" class="arrow" aria-label="Scroll to story">▼</a>
+  </div>
+
+</div><!-- /.page -->
+
+
+<!-- ═══════════ PART 2 — STORY ═══════════ -->
+
+<div class="story-wrap" id="story">
+  <div class="page">
+
+    <!-- 01 / 10⁰ · ONE SECOND — eye blink -->
+    <section class="scene" id="s1">
+      <header class="power-marker reveal">
+        <div class="pm-exp">10<sup>0</sup></div>
+        <div class="pm-body">
+          <div class="pm-word"><b>ONE</b> SECOND</div>
+          <div class="pm-num">= 1 SEC</div>
+        </div>
+        <div class="pm-counter"><em>01</em>SCENE / 05</div>
+      </header>
+      <h2 class="h-scene reveal">One <b>blink.</b><em>That's how long a second feels.</em></h2>
+      <p class="p-scene reveal d2">A second is the time it takes to <span class="hl">blink</span>, take half a breath, or for light to lap the earth <span class="hl-cyan">seven and a half times</span>. It's small. It's the unit we're going to multiply by a billion.</p>
+
+      <div class="viz reveal d3">
+        <span class="scaledtag">EYE · BLINK</span>
+        <span class="scaletag-right">≈ 1 BLINK</span>
+        <div class="viz-stage">
+          <svg class="eye-svg" viewBox="0 0 220 120" preserveAspectRatio="xMidYMid meet" aria-label="Blinking eye">
+            <line x1="22" y1="60" x2="198" y2="60" stroke="#171a20" stroke-width="5" stroke-linecap="round"></line>
+            <g class="eye-open">
+              <path d="M 22 60 Q 110 6 198 60 Q 110 114 22 60 Z"
+                    fill="#fafaf5" stroke="#171a20" stroke-width="5" stroke-linejoin="round"></path>
+              <circle cx="110" cy="60" r="30" fill="#00c2ff" stroke="#171a20" stroke-width="4"></circle>
+              <circle cx="110" cy="60" r="13" fill="#171a20"></circle>
+              <circle cx="100" cy="51" r="5" fill="#fafaf5"></circle>
+            </g>
+          </svg>
+          <div class="blink-cue"><span class="dot"></span><em>BLINK</em> · ≈ 3 SEC BETWEEN</div>
+        </div>
+        <div class="viz-stats">
+          <div class="cell">
+            <div class="k">Eye blink</div>
+            <div class="v">≈ 0.3 sec</div>
+            <div class="u">duration of one closing</div>
+          </div>
+          <div class="cell">
+            <div class="k">Human heart</div>
+            <div class="v">1 beat</div>
+            <div class="u">at rest · ≈ 60 bpm</div>
+          </div>
+          <div class="cell">
+            <div class="k">Light travels</div>
+            <div class="v">300,000 km</div>
+            <div class="u">7.5× around the earth</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 / 10³ · ONE THOUSAND SECONDS — breaths -->
+    <section class="scene" id="s2">
+      <header class="power-marker reveal">
+        <div class="pm-exp">10<sup>3</sup></div>
+        <div class="pm-body">
+          <div class="pm-word"><b>ONE THOUSAND</b> SECONDS</div>
+          <div class="pm-num">= 1,000 SEC</div>
+        </div>
+        <div class="pm-counter"><em>02</em>SCENE / 05</div>
+      </header>
+      <h2 class="h-scene reveal">Two hundred <b>breaths.</b><em>Sixteen and a half minutes.</em></h2>
+      <p class="p-scene reveal d2">A thousand seconds is one sitcom <span class="hl-cyan">with the ads cut out</span>, or the time it takes your heart to beat <span class="hl">about a thousand times</span>. In and out, in and out — roughly two hundred breaths.</p>
+
+      <div class="viz reveal d3">
+        <span class="scaledtag">LUNGS · BREATH</span>
+        <span class="scaletag-right">16 MIN 40 S</span>
+        <div class="viz-stage">
+          <svg class="breath-svg" viewBox="0 0 220 200" aria-label="Breathing lungs">
+            <path d="M 110 30 L 110 70" fill="none" stroke="#171a20" stroke-width="4" stroke-linecap="round"></path>
+            <path d="M 88 64 Q 110 54 132 64" fill="none" stroke="#171a20" stroke-width="4" stroke-linecap="round"></path>
+            <ellipse class="lung-l" cx="78" cy="122" rx="26" ry="44"
+                     fill="#ff5d3a" stroke="#171a20" stroke-width="3.5"></ellipse>
+            <ellipse class="lung-r" cx="142" cy="122" rx="26" ry="44"
+                     fill="#ff5d3a" stroke="#171a20" stroke-width="3.5"></ellipse>
+            <line x1="40" y1="178" x2="180" y2="178" stroke="#171a20" stroke-width="3" stroke-linecap="round"></line>
+          </svg>
+          <div class="breath-meta">
+            <div class="cue in">▲ IN</div>
+            <div class="cue out">▼ OUT</div>
+            <div class="cycle">5 SEC / CYCLE</div>
+          </div>
+        </div>
+        <div class="viz-stats">
+          <div class="cell">
+            <div class="k">Breaths</div>
+            <div class="v">≈ 200</div>
+            <div class="u">at 12 / minute</div>
+          </div>
+          <div class="cell">
+            <div class="k">Heartbeats</div>
+            <div class="v">≈ 1,250</div>
+            <div class="u">at 75 bpm</div>
+          </div>
+          <div class="cell">
+            <div class="k">In real life</div>
+            <div class="v">One sitcom</div>
+            <div class="u">no ads · or 5 pop songs</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 / 10⁶ · ONE MILLION SECONDS — moon phase -->
+    <section class="scene" id="s3">
+      <header class="power-marker reveal">
+        <div class="pm-exp">10<sup>6</sup></div>
+        <div class="pm-body">
+          <div class="pm-word"><b>ONE MILLION</b> SECONDS</div>
+          <div class="pm-num">= 1,000,000 SEC</div>
+        </div>
+        <div class="pm-counter"><em>03</em>SCENE / 05</div>
+      </header>
+      <h2 class="h-scene reveal">The <b>moon</b> shifts.<em>Eleven and a half days.</em></h2>
+      <p class="p-scene reveal d2">The sun will rise and set <span class="hl-green">eleven times</span>. Starting from new, the moon will <span class="hl-plum">wax past first quarter</span> and swell into a gibbous — about <span class="hl">39%</span> of its 29.5-day cycle.</p>
+
+      <div class="viz reveal d3">
+        <span class="scaledtag">MOON · PHASE</span>
+        <span class="scaletag-right">≈ 11 DAYS 13 H</span>
+        <div class="viz-stage">
+          <div class="moon-stage">
+            <div class="moon">
+              <div class="moon-shadow"></div>
+            </div>
+            <div class="moon-phases">
+              <span class="ph" style="--off: 0;" aria-label="new"></span>
+              <span class="ph" style="--off: -25%;" aria-label="waxing crescent"></span>
+              <span class="ph" style="--off: -50%;" aria-label="first quarter"></span>
+              <span class="ph marker" style="--off: -78%;" aria-label="waxing gibbous · 1M sec"></span>
+              <span class="ph" style="--off: -100%;" aria-label="full"></span>
+              <span class="ph-label">↑ 1M SEC LANDS HERE</span>
+            </div>
+          </div>
+        </div>
+        <div class="viz-stats">
+          <div class="cell">
+            <div class="k">Duration</div>
+            <div class="v">11 d 13 h</div>
+            <div class="u">≈ 11.6 days</div>
+          </div>
+          <div class="cell">
+            <div class="k">Moon cycle</div>
+            <div class="v">39% complete</div>
+            <div class="u">new → waxing gibbous</div>
+          </div>
+          <div class="cell">
+            <div class="k">Sunrises</div>
+            <div class="v">≈ 12</div>
+            <div class="u">if you're keeping count</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 / 10⁹ · ONE BILLION SECONDS — solar orbits -->
+    <section class="scene" id="s4">
+      <header class="power-marker reveal">
+        <div class="pm-exp">10<sup>9</sup></div>
+        <div class="pm-body">
+          <div class="pm-word"><b>ONE BILLION</b> SECONDS</div>
+          <div class="pm-num">= 1,000,000,000 SEC</div>
+        </div>
+        <div class="pm-counter"><em>04</em>SCENE / 05</div>
+      </header>
+      <h2 class="h-scene reveal">Thirty-one <b>orbits.</b><em>Around the sun.</em></h2>
+      <p class="p-scene reveal d2">A billion seconds is about <span class="hl">31 years and 251 days</span>. In that time the earth completes 31.7 trips around the sun — and saturn, on its <span class="hl-plum">slow 29.5-year lap</span>, just barely finishes one. A billion seconds is one human, growing up.</p>
+
+      <div class="viz reveal d3">
+        <span class="scaledtag">PLANETS · ORBIT</span>
+        <span class="scaletag-right">≈ 31 YR 251 D</span>
+        <div class="viz-stage">
+          <div class="orbit">
+            <div class="orbit-ring r-saturn"></div>
+            <div class="orbit-ring r-earth"></div>
+            <div class="orbit-sweep s-saturn"><div class="orbit-planet saturn"></div></div>
+            <div class="orbit-sweep s-earth"><div class="orbit-planet earth"></div></div>
+            <div class="orbit-sun"></div>
+          </div>
+          <div class="orbit-legend">
+            <div><i class="e"></i>EARTH · 365 D / LAP</div>
+            <div><i class="s"></i>SATURN · 29.5 YR / LAP</div>
+          </div>
+          <div class="orbit-counter">
+            <span class="big"><em id="earthLapCount">0</em>/31</span>
+            EARTH ORBITS<br/>SINCE YOU PRESSED PLAY
+          </div>
+        </div>
+        <div class="viz-stats">
+          <div class="cell">
+            <div class="k">Earth laps</div>
+            <div class="v">31.7</div>
+            <div class="u">around the sun</div>
+          </div>
+          <div class="cell">
+            <div class="k">Saturn laps</div>
+            <div class="v">1.08</div>
+            <div class="u">its year is 29.5 of ours</div>
+          </div>
+          <div class="cell">
+            <div class="k">In human terms</div>
+            <div class="v">Birth → 30s</div>
+            <div class="u">school, first job, first grey hair</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 / 10¹² · ONE TRILLION SECONDS — deep time / ice age -->
+    <section class="scene" id="s5">
+      <header class="power-marker reveal">
+        <div class="pm-exp">10<sup>12</sup></div>
+        <div class="pm-body">
+          <div class="pm-word"><b>ONE TRILLION</b> SECONDS</div>
+          <div class="pm-num">= 1,000,000,000,000 SEC</div>
+        </div>
+        <div class="pm-counter"><em>05</em>SCENE / 05</div>
+      </header>
+      <h2 class="h-scene reveal">Thirty-one <b>thousand</b> years.<em>All the way back to the ice age.</em></h2>
+      <p class="p-scene reveal d2">Multiply once more and a trillion seconds reaches back about <span class="hl">31,710 years</span> — past every empire, every pyramid, every word ever written. Back then ice sheets two miles thick covered the north and <span class="hl-plum">mammoths</span> walked where cities stand now. It is roughly <span class="hl-cyan">six times longer</span> than all of recorded history.</p>
+
+      <div class="viz reveal d3">
+        <span class="scaledtag">DEEP TIME · ICE CORE</span>
+        <span class="scaletag-right">≈ 31,710 YEARS</span>
+        <div class="viz-stage">
+          <div class="core-grid">
+            <div class="cg-row r1">
+              <div class="cg-bar"><span class="scan"></span></div>
+              <div class="cg-label"><b>2026 · Today</b><span>0 years ago · surface</span></div>
+            </div>
+            <div class="cg-row r2">
+              <div class="cg-bar"><span class="scan"></span></div>
+              <div class="cg-label"><b>First cities &amp; writing</b><span>≈ 5,000 years ago</span></div>
+            </div>
+            <div class="cg-row r3">
+              <div class="cg-bar"><span class="scan"></span></div>
+              <div class="cg-label"><b>Last ice age ends</b><span>≈ 11,700 years ago</span></div>
+            </div>
+            <div class="cg-row r4">
+              <div class="cg-bar"><span class="scan"></span></div>
+              <div class="cg-label"><b>Lascaux cave paintings</b><span>≈ 17,000 years ago</span></div>
+            </div>
+            <div class="cg-row r5">
+              <div class="cg-bar"><span class="scan"></span></div>
+              <div class="cg-label"><b class="mark">1 trillion sec ago</b><span>≈ 31,710 years ago · mammoths &amp; 2-mile ice</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="viz-stats">
+          <div class="cell">
+            <div class="k">Duration</div>
+            <div class="v">31,710 yr</div>
+            <div class="u">≈ 31,688 years</div>
+          </div>
+          <div class="cell">
+            <div class="k">vs. recorded history</div>
+            <div class="v">6× longer</div>
+            <div class="u">writing is ≈ 5,000 yr old</div>
+          </div>
+          <div class="cell">
+            <div class="k">The world then</div>
+            <div class="v">Ice Age</div>
+            <div class="u">mammoths · glaciers · no farms</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div><!-- /.page -->
+</div><!-- /.story-wrap -->
+
+<script>
+  import { parseDate, compute, fmtNum, BILLION } from '../lib/onebillion.ts';
+
+  const $ = (s: string) => document.querySelector(s) as HTMLElement | null;
+
+  let birth = parseDate(($('#bday') as HTMLInputElement)?.value ?? '');
+  let currentCompute = birth ? compute(birth) : null;
+
+  function fmtBig(n: number): string {
+    return Math.floor(n).toLocaleString('en-US')
+      .replace(/,/g, '<span class="sep">,</span>');
+  }
+
+  function fmtCkDate(d: Date): string {
+    const yyyy = d.getFullYear();
+    const mm = String(d.getMonth() + 1).padStart(2, '0');
+    const dd = String(d.getDate()).padStart(2, '0');
+    return `${yyyy} · ${mm} · ${dd}`;
+  }
+
+  function renderStatic() {
+    const c = currentCompute;
+    if (!c) return;
+    const dDays = $('#dDays'); if (dDays) dDays.textContent = fmtNum(c.daysLived);
+    const dWeeks = $('#dWeeks'); if (dWeeks) dWeeks.textContent = fmtNum(c.weeksLived);
+    const dHb = $('#dHb'); if (dHb) dHb.textContent = fmtNum(c.secondsLived / 60 * 75);
+    const dBr = $('#dBr'); if (dBr) dBr.textContent = fmtNum(c.secondsLived / 60 * 12);
+    const ckDate = $('#ckDate'); if (ckDate) ckDate.textContent = fmtCkDate(c.birth);
+
+    const lbar = $('#lbar');
+    if (lbar) {
+      lbar.innerHTML = '';
+      const bill1Year = Math.floor(c.billionAge);
+      const bill2Year = Math.floor(c.billionAge * 2);
+      for (let i = 0; i < 90; i++) {
+        const d = document.createElement('div');
+        d.className = 'y';
+        if (i < Math.floor(c.ageYears)) d.classList.add('lived');
+        if (i === Math.floor(c.ageYears)) d.classList.add('now');
+        if (i === bill1Year) d.classList.add('bill1');
+        if (i === bill2Year) d.classList.add('bill2');
+        lbar.appendChild(d);
+      }
+    }
+  }
+
+  function tickBig() {
+    if (!birth) return;
+    const sec = (Date.now() - birth.getTime()) / 1000;
+    const bigDigits = $('#bigDigits');
+    if (bigDigits) bigDigits.innerHTML = fmtBig(sec);
+    const pct = (sec / BILLION) * 100;
+    const pctLabel = $('#pctLabel');
+    if (pctLabel) pctLabel.textContent = `${pct.toFixed(2)}%`;
+  }
+
+  function onNewDate(val: string) {
+    const d = parseDate(val);
+    if (!d) return;
+    birth = d;
+    currentCompute = compute(birth);
+    renderStatic();
+    tickBig();
+  }
+
+  const form = document.getElementById('form') as HTMLFormElement | null;
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    onNewDate((document.getElementById('bday') as HTMLInputElement).value);
+  });
+  (document.getElementById('bday') as HTMLInputElement)?.addEventListener('change', (e) => {
+    onNewDate((e.target as HTMLInputElement).value);
+  });
+
+  // Scene 04: orbit lap counter (Earth animation = 1.2s/lap in CSS)
+  const EARTH_ORBIT_MS = 1200;
+  let orbitStart: number | null = null;
+  function startOrbitCounter() {
+    if (orbitStart !== null) return;
+    orbitStart = performance.now();
+    tickOrbit();
+  }
+  function tickOrbit() {
+    if (orbitStart === null) return;
+    const elapsed = performance.now() - orbitStart;
+    const laps = Math.min(31, Math.floor(elapsed / EARTH_ORBIT_MS));
+    const el = $('#earthLapCount');
+    if (el) el.textContent = String(laps);
+    if (laps < 31) requestAnimationFrame(tickOrbit);
+  }
+
+  // Fade-in scenes on scroll
+  const scenes = [...document.querySelectorAll<HTMLElement>('.scene')];
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(ent => {
+      if (ent.isIntersecting) {
+        ent.target.classList.add('in');
+        if ((ent.target as HTMLElement).id === 's4') startOrbitCounter();
+      }
+    });
+  }, { threshold: 0.35 });
+  scenes.forEach(s => io.observe(s));
+
+  // Boot
+  renderStatic();
+  tickBig();
+  setInterval(tickBig, 80);
+</script>
+
+</body>
+</html>

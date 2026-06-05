@@ -1,42 +1,27 @@
 {
-  "name": "oneb",
-  "version": "1.0.0",
-  "description": "OneBillionSeconds.com",
-  "main": "index.js",
+  "name": "onebillionseconds",
+  "type": "module",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=22.12.0"
+  },
   "scripts": {
-    "clean": "rimraf _site",
-    "serve:webpack": "webpack --mode development --watch",
-    "serve:eleventy": "ELEVENTY_ENV=development eleventy --serve --config .eleventy.js",
-    "serve": "npm-run-all clean --parallel serve:*",
-    "build:webpack": "webpack --mode production",
-    "build:eleventy": "ELEVENTY_ENV=production eleventy",
-    "build": "run-s clean build:*"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/elmerland/oneb.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/elmerland/oneb/issues"
-  },
-  "homepage": "https://github.com/elmerland/oneb#readme",
-  "devDependencies": {
-    "@11ty/eleventy": "^0.12.1",
-    "@babel/core": "^7.16.7",
-    "@babel/preset-env": "^7.16.7",
-    "@babel/preset-react": "^7.16.7",
-    "babel-loader": "^8.2.3",
-    "luxon": "^2.2.0",
-    "npm-run-all": "^4.1.5",
-    "rimraf": "^3.0.2",
-    "webpack": "^5.65.0",
-    "webpack-cli": "^4.9.1"
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "deploy": "bash scripts/deploy.sh",
+    "links": "linkinator https://onebillionseconds.io --recurse --skip 'linkedin\\.com' --format csv"
   },
   "dependencies": {
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "@fontsource/ibm-plex-mono": "^5.2.7",
+    "astro": "^6.4.2"
+  },
+  "devDependencies": {
+    "@astrojs/cloudflare": "^13.5.5",
+    "@tailwindcss/typography": "^0.5.19",
+    "linkinator": "^7.6.1",
+    "tailwindcss": "^4.3.0",
+    "wrangler": "^4.95.0"
   }
 }

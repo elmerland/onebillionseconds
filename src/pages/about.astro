@@ -1,0 +1,45 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import { SITE_TITLE } from '../consts';
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+  <BaseHead
+    title={`About — ${SITE_TITLE}`}
+    description="About onebillionseconds.io — a small tool for finding your one billion second milestone."
+  />
+</head>
+<body>
+<div class="page">
+  <header style="padding: 28px 0 18px; display: flex; align-items: center; justify-content: space-between; gap: 20px;">
+    <a href="/" style="font-size: 10px; letter-spacing: 2px; text-transform: uppercase; font-weight: 800; color: var(--c-yellow); text-decoration: none;">← onebillionseconds.io</a>
+    <span style="font-size: 10px; letter-spacing: 1.6px; text-transform: uppercase; opacity: 0.45; font-weight: 700;">ABOUT</span>
+  </header>
+  <div class="rule-strip dash"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+
+  <main id="main-content" style="padding: 40px 0 80px; max-width: 64ch;">
+    <h1 style="font-size: clamp(28px, 4vw, 48px); font-weight: 800; text-transform: uppercase; line-height: 0.95; letter-spacing: -0.5px; margin: 0 0 32px; color: var(--cream);">
+      One Billion<br /><span style="color: var(--c-yellow);">Seconds</span>
+    </h1>
+    <p style="font-size: 14px; line-height: 1.78; color: var(--cream); opacity: 0.85; margin: 0 0 16px;">
+      <strong style="color: var(--cream);">onebillionseconds.io</strong> is a small weekend project by
+      <a href="https://github.com/elmerland" style="color: var(--c-cyan); text-decoration: none; font-weight: 700;" target="_blank" rel="noopener">Elmer</a>.
+    </p>
+    <p style="font-size: 14px; line-height: 1.78; color: var(--cream); opacity: 0.85; margin: 0 0 16px;">
+      One billion seconds is exactly 1,000,000,000 s — roughly 31.7 years. The idea is simple:
+      enter your birthday, get the date of your personal billion-second milestone.
+    </p>
+    <p style="font-size: 14px; line-height: 1.78; color: var(--cream); opacity: 0.85; margin: 0 0 32px;">
+      Built with <a href="https://astro.build" style="color: var(--c-cyan); text-decoration: none;" target="_blank" rel="noopener">Astro</a>,
+      <a href="https://tailwindcss.com" style="color: var(--c-cyan); text-decoration: none;" target="_blank" rel="noopener">Tailwind CSS</a>,
+      and deployed on <a href="https://pages.cloudflare.com" style="color: var(--c-cyan); text-decoration: none;" target="_blank" rel="noopener">Cloudflare Pages</a>.
+    </p>
+    <div style="display: flex; gap: 16px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; font-weight: 800;">
+      <a href="/" style="background: var(--c-yellow); color: var(--plate); padding: 10px 18px; text-decoration: none;">← Back Home</a>
+    </div>
+  </main>
+</div>
+</body>
+</html>
